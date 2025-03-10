@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, WEIGHTS, BREAKPOINTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -30,6 +32,17 @@ const Header = () => {
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
         <Side />
+        <SideMobileMenu>
+          <UnstyledButton>
+            <SideMobileMenuIcon id="shopping-bag" strokeWidth={1} />
+          </UnstyledButton>
+          <UnstyledButton>
+            <SideMobileMenuIcon id="search" strokeWidth={1} />
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+            <SideMobileMenuIcon id="menu" strokeWidth={1} />
+          </UnstyledButton>
+        </SideMobileMenu>
       </MainHeader>
 
       <MobileMenu
@@ -46,17 +59,45 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    border-top: 4px solid ${COLORS.gray[900]};
+  }
+
+  @media (max-width: ${BREAKPOINTS.phone}) {
+    padding: 18px 16px;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
   margin: 0px 48px;
+  gap: clamp(2rem, 5vw - 1.25rem, 3rem);
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    display: none;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
 `;
+
+const SideMobileMenu = styled.nav`
+  display: none;
+  align-items: center;
+  gap: 32px;
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    display: flex;
+  }
+`
+
+const SideMobileMenuIcon = styled(Icon)`
+  width: 24px;
+  height: 24px;
+  color: black;
+`
 
 const NavLink = styled.a`
   font-size: 1.125rem;
