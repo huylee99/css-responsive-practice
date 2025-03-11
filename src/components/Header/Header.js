@@ -7,6 +7,7 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,21 +21,24 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
+        </LogoWrapper>
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
+          <NavLink href="/men">Men</NavLink>
+          <NavLink href="/men">Men</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
-        <Side />
+        <Filler />
         <SideMobileMenu>
           <UnstyledButton>
             <SideMobileMenuIcon id="shopping-bag" strokeWidth={1} />
+            <VisuallyHidden>Open cart</VisuallyHidden>
           </UnstyledButton>
           <UnstyledButton>
             <SideMobileMenuIcon id="search" strokeWidth={1} />
@@ -57,8 +61,8 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow: auto;
 
   @media (max-width: ${BREAKPOINTS.tablet}) {
     border-top: 4px solid ${COLORS.gray[900]};
@@ -79,9 +83,17 @@ const Nav = styled.nav`
   }
 `;
 
-const Side = styled.div`
+const LogoWrapper = styled.div`
   flex: 1;
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    flex: revert;
+  }
 `;
+
+const Filler = styled.div`
+  flex: 1;
+`
 
 const SideMobileMenu = styled.nav`
   display: none;

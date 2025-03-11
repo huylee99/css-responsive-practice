@@ -14,7 +14,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   }
 
   return (
-    <MenuOverlay>
+    <MenuOverlay isOpen={isOpen} onDismiss={onDismiss}>
       <MenuContent>
         <Wrapper>
           <Button onClick={onDismiss}>
@@ -22,7 +22,6 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
             <Icon id="close" />
           </Button>
           <Side />
-
           <Nav>
             <NavLink href="/sale">Sale</NavLink>
             <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -70,7 +69,7 @@ const Footer = styled.footer`
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 `
 
 const NavLink = styled.a`
@@ -97,14 +96,14 @@ const MenuOverlay = styled(DialogOverlay)`
   left: 0;
   bottom: 0;
   background-color: hsl(0, 0%, 0%, .5);
+  display: flex;
+  justify-content: flex-end;
 `
 
 const MenuContent = styled(DialogContent)`
   width: 300px;
   height: 100%;
   background-color: white;
-  position: absolute;
-  right: 0;
 `
 
 
